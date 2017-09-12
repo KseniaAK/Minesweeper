@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { revealSquare } from '../actions/index'
+import { revealSquare, initializeBoard, gameOver, changeColor } from '../actions/index'
 
 class BoardSquare extends Component {
   constructor(props) {
@@ -13,7 +13,9 @@ class BoardSquare extends Component {
     let valueToRender
 
     // Only render square's value once user has clicked on it
-    if (currSquare.open === true) valueToRender = currSquare.val
+    if (currSquare.open === true) {
+      valueToRender = currSquare.val
+    }
     else valueToRender = ''
 
     return (
@@ -23,6 +25,12 @@ class BoardSquare extends Component {
         onClick={(event) => {
           event.preventDefault()
           this.props.revealSquare(this.props.squareNum)
+          
+          // In case player opens a mine:
+          if (this.props.boardConfig[this.props.squareNum - 1].val === 'X') {
+            this.props.changeColor('red')
+            this.props.gameOver()
+          }
         }}
       >
         {valueToRender}
@@ -36,7 +44,7 @@ function mapStateToProps({ color, boardConfig }) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ revealSquare }, dispatch)
+  return bindActionCreators({ revealSquare, initializeBoard, gameOver, changeColor }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardSquare)
