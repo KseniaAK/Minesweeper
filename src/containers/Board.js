@@ -4,8 +4,9 @@ import BoardRow from '../components/BoardRow'
 export default class Board extends Component {
   render() {
     const boardRows = []
-    for (let i = 0; i < 9; i++) {
-      boardRows.push(<BoardRow key={i} />)
+    const width = 9
+    for (let i = 1; i <= width; i++) {
+      boardRows.push(<BoardRow key={i} rowNum={i} width={width} />)
     }
 
     return (
