@@ -1,8 +1,7 @@
-import { INITIALIZE } from '../actions/index'
-import { REVEAL } from '../actions/index'
+import { INITIALIZE, REVEAL, GAME_OVER } from '../actions/index'
 
 const WIDTH = 9
-const MAX_MINES = 15
+const MAX_MINES = 18
 const defaultState = []
 
 for (let i = 0; i <= WIDTH * WIDTH; i++) {
@@ -14,14 +13,21 @@ for (let i = 0; i <= WIDTH * WIDTH; i++) {
 }
 
 export default function(state = initializeBoard(), action) {
+  const newBoardState = [...state]
   switch(action.type) {
     case INITIALIZE:
       return initializeBoard()
       
     case REVEAL:
-      const newBoardState = [...state]
       newBoardState[action.payload - 1].open = true
       return newBoardState
+
+    case GAME_OVER:
+      Object.keys(newBoardState).forEach((key) => {
+        newBoardState[key].open = true
+      })
+      return newBoardState
+  
   }
   return state
 }
