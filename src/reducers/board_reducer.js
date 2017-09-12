@@ -120,8 +120,3 @@ function initializeBoard() {
 
   return freshBoard
 }
-
-function revealSquare(squareNum) {
-  
-  return
-}
