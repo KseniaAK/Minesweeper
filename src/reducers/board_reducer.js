@@ -13,7 +13,7 @@ for (let i = 0; i <= WIDTH * WIDTH; i++) {
   })
 }
 
-export default function(state = defaultState, action) {
+export default function(state = initializeBoard(), action) {
   switch(action.type) {
     case INITIALIZE:
       return initializeBoard()
