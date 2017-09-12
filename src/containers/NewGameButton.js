@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { initializeBoard } from '../actions/index'
+import { initializeBoard, changeColor } from '../actions/index'
 
 class NewGameButton extends Component {
   render() {
@@ -9,8 +9,9 @@ class NewGameButton extends Component {
       <button 
       type='button' 
       onClick={(event) => {
-        event.preventDefault()
-        this.props.initializeBoard()
+          event.preventDefault()
+          this.props.changeColor('white')
+          this.props.initializeBoard()
         }}
       >
         New Game!
@@ -20,7 +21,7 @@ class NewGameButton extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ initializeBoard }, dispatch)
+  return bindActionCreators({ initializeBoard, changeColor }, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(NewGameButton)
