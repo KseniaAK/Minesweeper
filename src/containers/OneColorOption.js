@@ -13,6 +13,7 @@ class OneColorOption extends Component {
           event.preventDefault()
           this.props.changeColor(this.props.color)
         }}
+        style={{backgroundColor: this.props.color}}
       >
         {this.props.color}
       </button>

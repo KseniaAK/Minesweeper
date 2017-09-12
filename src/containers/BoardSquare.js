@@ -25,10 +25,10 @@ class BoardSquare extends Component {
         onClick={(event) => {
           event.preventDefault()
           this.props.revealSquare(this.props.squareNum)
-          
+
           // In case player opens a mine:
           if (this.props.boardConfig[this.props.squareNum - 1].val === 'X') {
-            this.props.changeColor('red')
+            this.props.changeColor('tomato')
             this.props.gameOver()
           }
         }}

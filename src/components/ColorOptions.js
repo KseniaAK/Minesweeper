@@ -3,11 +3,11 @@ import OneColorOption from '../containers/OneColorOption'
 
 export default class ColorOptions extends Component {
   render() {
-    const colors = ['purple', 'blue', 'green']
+    const colors = ['aquamarine', 'plum', 'paleturquoise']
     const colorOptions = colors.map(color => <OneColorOption color={color} key={color} />)
 
     return (
-      <div>
+      <div id='color-options'>
         {colorOptions}
       </div>
     )
