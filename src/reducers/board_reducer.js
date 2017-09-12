@@ -1,4 +1,5 @@
 import { INITIALIZE } from '../actions/index'
+import { REVEAL } from '../actions/index'
 
 const WIDTH = 9
 const MAX_MINES = 15
@@ -7,14 +8,20 @@ const defaultState = []
 for (let i = 0; i <= WIDTH * WIDTH; i++) {
   defaultState.push({
     num: i,
-    val: '' 
+    val: '',
+    open: false
   })
 }
 
 export default function(state = defaultState, action) {
   switch(action.type) {
     case INITIALIZE:
-    return initializeBoard()
+      return initializeBoard()
+      
+    case REVEAL:
+      const newBoardState = [...state]
+      newBoardState[action.payload - 1].open = true
+      return newBoardState
   }
   return state
 }
@@ -91,17 +98,24 @@ function initializeBoard() {
     if (minedSquares.indexOf(i) !== -1) {
       freshBoard.push({
         num: i,
-        val: 'X' 
+        val: 'X',
+        open: false        
       })
     }
     // WHen a square does not have a mine, get number of adjacent mines
     else {
       freshBoard.push({
         num: i,
-        val: getAdjacentX(i, minedSquares)
+        val: getAdjacentX(i, minedSquares),
+        open: false        
       })
     }
   }
 
   return freshBoard
+}
+
+function revealSquare(squareNum) {
+  
+  return
 }
