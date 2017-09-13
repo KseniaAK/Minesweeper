@@ -2,15 +2,6 @@ import { INITIALIZE, REVEAL, GAME_OVER } from '../actions/index'
 
 const WIDTH = 9
 const MAX_MINES = 18
-const defaultState = []
-
-for (let i = 0; i <= WIDTH * WIDTH; i++) {
-  defaultState.push({
-    num: i,
-    val: '',
-    open: false
-  })
-}
 
 export default function(state = initializeBoard(), action) {
   const newBoardState = [...state]
