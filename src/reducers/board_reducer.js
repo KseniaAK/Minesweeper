@@ -1,13 +1,18 @@
-import { INITIALIZE, REVEAL, GAME_OVER } from '../actions/index'
+import { INITIALIZE, REVEAL, GAME_OVER, WIDTH } from '../actions/index'
 
-const WIDTH = 9
-const MAX_MINES = 18
+function getDefaultState() {
+  const defaultState = []
+  for (let i = 0; i < WIDTH * WIDTH; i++) {
+    defaultState.push(null)
+  }
+  return defaultState
+}
 
-export default function(state = initializeBoard(), action) {
+export default function(state = getDefaultState(), action) {
   const newBoardState = [...state]
   switch(action.type) {
     case INITIALIZE:
-      return initializeBoard()
+      return initializeBoard(action.minedSquaresArr)
       
     case REVEAL:
       newBoardState[action.payload - 1].open = true
@@ -18,25 +23,10 @@ export default function(state = initializeBoard(), action) {
         newBoardState[key].open = true
       })
       return newBoardState
-  
-  }
-  return state
-}
 
-function generateLocation(minedSqArr) {
-  // Random number will be the position of a mine
-  // Minimum 1, maximum WIDTH * WIDTH
-  const mineLocation = Math.floor(Math.random() * (WIDTH * WIDTH) + 1)
-  if (minedSqArr.indexOf(mineLocation) !== -1) return generateLocation(minedSqArr)
-  return mineLocation
-}
-
-function getMinedSquares() {
-  const minedSq = []
-  for (let i = 0; i < MAX_MINES; i++) {
-    minedSq.push(generateLocation(minedSq))
+    default:
+      return state
   }
-  return minedSq
 }
 
 function getAdjacentX(currSquare, minedSqArr) {
@@ -86,13 +76,12 @@ function getAdjacentX(currSquare, minedSqArr) {
   }, 0)
 }
 
-function initializeBoard() {
+function initializeBoard(minedSquaresArr) {
   const freshBoard = []
-  const minedSquares = getMinedSquares()
 
   for (let i = 1; i <= WIDTH * WIDTH; i++) {
     // When a square has a mine
-    if (minedSquares.indexOf(i) !== -1) {
+    if (minedSquaresArr.indexOf(i) !== -1) {
       freshBoard.push({
         num: i,
         val: 'X',
@@ -103,7 +92,7 @@ function initializeBoard() {
     else {
       freshBoard.push({
         num: i,
-        val: getAdjacentX(i, minedSquares),
+        val: getAdjacentX(i, minedSquaresArr),
         open: false        
       })
     }
