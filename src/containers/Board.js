@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import BoardRow from '../components/BoardRow'
+import { initializeBoard } from '../actions/index'
 
-export default class Board extends Component {
+class Board extends Component {
+  componentWillMount() {
+    this.props.initializeBoard()
+  }
+  
   render() {
     const boardRows = []
     const width = 9
@@ -16,3 +23,9 @@ export default class Board extends Component {
     )
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ initializeBoard }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Board)
