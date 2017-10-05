@@ -23,7 +23,6 @@ class BoardSquare extends Component {
         className='board-square' 
         style={{backgroundColor: this.props.color}}
         onClick={(event) => {
-          event.preventDefault()
           this.props.revealSquare(this.props.squareNum)
 
           // In case player opens a mine:
