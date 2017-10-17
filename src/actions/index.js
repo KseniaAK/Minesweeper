@@ -3,6 +3,7 @@ export const INITIALIZE = 'INITIALIZE'
 export const REVEAL = 'REVEAL'
 export const GAME_OVER = 'GAME_OVER'
 export const WIDTH = 9
+export const FLAG = 'FLAG'
 const MAX_MINES = 18
 
 export function changeColor(color) {
@@ -46,4 +47,29 @@ function getMinedSquares() {
     minedSq.push(generateLocation(minedSq))
   }
   return minedSq
+}
+
+export function clickBoardSquare(mouseButton, squareNum) {
+  return (dispatch, getState) => {
+    if (mouseButton === 0) {
+      // if player clicks with left mouse button, reveal the square
+      dispatch(revealSquare(squareNum))
+      
+      // In case player revealed square is a mine:
+      if (getState().boardConfig[squareNum - 1].val === 'X') {
+        dispatch(changeColor('tomato'))
+        dispatch(gameOver())
+      }
+    } else if (mouseButton === 2) {
+      // if player clicks with right mouse button, flag the square
+      dispatch(flagSquare(squareNum))
+    }
+  }
+}
+
+function flagSquare(squareNum) {
+  return {
+    type: FLAG,
+    squareNum
+  }
 }

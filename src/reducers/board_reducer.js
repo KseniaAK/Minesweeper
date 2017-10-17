@@ -1,4 +1,10 @@
-import { INITIALIZE, REVEAL, GAME_OVER, WIDTH } from '../actions/index'
+import {
+  INITIALIZE, 
+  REVEAL, 
+  GAME_OVER, 
+  WIDTH, 
+  FLAG
+} from '../actions/index'
 
 function getDefaultState() {
   const defaultState = []
@@ -22,6 +28,11 @@ export default function(state = getDefaultState(), action) {
       Object.keys(newBoardState).forEach((key) => {
         newBoardState[key].open = true
       })
+      return newBoardState
+
+    case FLAG:
+      newBoardState[action.squareNum - 1].flag = true
+      newBoardState[action.squareNum - 1].val = '?'
       return newBoardState
 
     default:
@@ -85,7 +96,8 @@ function initializeBoard(minedSquaresArr) {
       freshBoard.push({
         num: i,
         val: 'X',
-        open: false        
+        open: false,
+        flag: false       
       })
     }
     // WHen a square does not have a mine, get number of adjacent mines
@@ -93,7 +105,8 @@ function initializeBoard(minedSquaresArr) {
       freshBoard.push({
         num: i,
         val: getAdjacentX(i, minedSquaresArr),
-        open: false        
+        open: false,
+        flag: false     
       })
     }
   }
