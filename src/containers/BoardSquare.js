@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { clickBoardSquare, initializeBoard, gameOver, changeColor } from '../actions/index'
+import classNames from 'classnames/bind'
+
+import styles from './scss/board-square.scss'
+
+const cx = classNames.bind(styles)
 
 class BoardSquare extends Component {
   constructor(props) {
@@ -20,14 +25,23 @@ class BoardSquare extends Component {
 
     // Only render square's value once user has clicked on it
     if (currSquare.open === true || currSquare.flag === true) {
-      valueToRender = currSquare.val
+      valueToRender = currSquare.val === 0 ? '' : currSquare.val
     }
     else valueToRender = ''
+    
+    const classSuffix = function() {
+      if (currSquare.open === true || currSquare.flag === true) {
+        if (currSquare.val === 0) return 'zero'
+        else if (currSquare.val > 0) return 'number'
+        else if (currSquare.val === 'X') return 'mine'
+      }
+      else return ''
+    }()
 
     return (
       <div 
-        className='board-square' 
         style={{backgroundColor: this.props.color}}
+        className={cx('board-square', classSuffix)}
         onMouseDown={this.handleMouseDown}
         onContextMenu={(event) => {
           event.preventDefault()
