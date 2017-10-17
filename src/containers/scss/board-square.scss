@@ -1,0 +1,17 @@
+.board-square {
+  display: flex;
+  height: 30px;
+  width: 30px;
+  border: 1px solid #665E5E;
+  justify-content: center;
+  align-items: center;
+
+  &.zero {
+    background-color: #CF86FF !important;
+  }
+
+
+  &.mine {
+    background-color: rgb(185, 40, 40);
+  }
+}

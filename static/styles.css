@@ -36,12 +36,3 @@ button {
   width: inherit;
   display: flex;
 }
-
-.board-square {
-  display: flex;
-  height: 30px;
-  width: 30px;
-  border: 1px solid #665E5E;
-  justify-content: center;
-  align-items: center; 
-}
