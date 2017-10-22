@@ -1,0 +1,21 @@
+@import '../../styles/variables';
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  > * {
+    margin: 1.3em;
+  }
+}
+
+.app-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-background;
+  height: 100vh;
+}

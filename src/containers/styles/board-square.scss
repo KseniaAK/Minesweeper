@@ -1,0 +1,14 @@
+@import '../../styles/variables';
+
+.board-square {
+  display: flex;
+  height: 2em;
+  width: 2em;
+  border: 0.01em solid $color-sq-border;
+  justify-content: center;
+  align-items: center;
+
+  &.zero {
+    background-color: $color-zero-sq !important;
+  }
+}
