@@ -4,7 +4,7 @@ import BoardReducer from './board_reducer'
 import GameReducer from './game_reducer'
 
 const rootReducer = combineReducers({
-  color: ColorReducer,
+  colorNum: ColorReducer,
   boardConfig: BoardReducer,
   gameOn: GameReducer
 })

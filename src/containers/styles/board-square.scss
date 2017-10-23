@@ -2,13 +2,15 @@
 
 .board-square {
   display: flex;
+  font-family: $font-stack;
   height: 2em;
   width: 2em;
-  border: 0.01em solid $color-sq-border;
+  border: 0.04em solid $color-sq-border;
+  margin: -0.04em;
   justify-content: center;
   align-items: center;
 
   &.zero {
-    background-color: $color-zero-sq !important;
+    background-color: $color-zero-sq;
   }
 }

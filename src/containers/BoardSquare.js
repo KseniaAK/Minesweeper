@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { clickBoardSquare, initializeBoard, gameOver, changeColor } from '../actions/index'
 import classNames from 'classnames/bind'
 
-import styles from './scss/board-square.scss'
+import styles from './styles/board-square.scss'
 
 const cx = classNames.bind(styles)
 
@@ -33,21 +33,18 @@ class BoardSquare extends Component {
       if (currSquare.open === true || currSquare.flag === true) {
         if (currSquare.val === 0) return 'zero'
         else if (currSquare.val > 0) return 'number'
-        else if (currSquare.val === 'X') return 'mine'
       }
       else return ''
     }()
 
     return (
       <div 
-        style={{backgroundColor: this.props.color}}
         className={cx('board-square', classSuffix)}
         onMouseDown={this.handleMouseDown}
         onContextMenu={(event) => {
           event.preventDefault()
           return false
-          }
-        }
+        }}
       >
         {valueToRender}
       </div>

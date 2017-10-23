@@ -2,7 +2,22 @@
 
 .board {
   display: flex;
+  flex-wrap: wrap;
+  background-color: white;
   border: none;
   margin: 0;
-  width: inherit;
+  width: 18em;
+  height: 18em;
+
+  &.color-1 {
+    background-color: $color-board-1;
+  }
+
+  &.color-2 {
+    background-color: $color-board-2;
+  }
+
+  &.color-3 {
+    background-color: $color-board-3;
+  }
 }

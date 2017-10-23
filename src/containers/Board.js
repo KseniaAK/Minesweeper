@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import BoardRow from '../components/BoardRow'
+import BoardSquare from '../containers/BoardSquare'
 import { initializeBoard } from '../actions/index'
+import classNames from 'classnames/bind'
+import styles from './styles/board.scss'
+
+const cx = classNames.bind(styles)
 
 class Board extends Component {
   componentWillMount() {
@@ -10,22 +14,26 @@ class Board extends Component {
   }
   
   render() {
-    const boardRows = []
+    const boardSquares = []
     const width = 9
-    for (let i = 1; i <= width; i++) {
-      boardRows.push(<BoardRow key={i} rowNum={i} width={width} />)
+    for (let i = 1; i <= width*width; i++) {
+      boardSquares.push(<BoardSquare key={i} squareNum={i} />)
     }
 
     return (
-      <div className='board'>
-        {boardRows}
+      <div className={cx('board', 'color-' + this.props.colorNum)}>
+        {boardSquares}
       </div>
     )
   }
+}
+
+function mapStateToProps({ colorNum }) {
+  return { colorNum }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ initializeBoard }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(Board)
+export default connect(mapStateToProps, mapDispatchToProps)(Board)
