@@ -28,8 +28,11 @@ class BoardSquare extends Component {
     if (currSquare.open === true || currSquare.flag === true) {
       valueToRender = currSquare.val === 0 ? '' : currSquare.val
     }
+    // squares that touch no mines don't display a number 
     else valueToRender = ''
     
+    // squares that touch no mines are of a different color
+    // if game is over, take this color off to have whole board be uniform 'game-over' color
     const classSuffix = function() {
       if (
         (
