@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { initializeBoard, changeColor } from '../actions/index'
+import styles from './styles/buttons.scss'
 
 class NewGameButton extends Component {
   render() {
@@ -9,8 +10,6 @@ class NewGameButton extends Component {
       <button 
       type='button' 
       onClick={(event) => {
-          event.preventDefault()
-          this.props.changeColor('white')
           this.props.initializeBoard()
         }}
       >
