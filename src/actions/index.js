@@ -66,7 +66,7 @@ export function clickBoardSquare(mouseButton, squareNum) {
 
       // In case player revealed square is a mine:
       if (getState().boardConfig[squareNum - 1].val === 'X') {
-        dispatch(changeColor('tomato'))
+        dispatch(changeColor('gameOver'))
         dispatch(gameOver())
       }
     } else if (mouseButton === 2) {

@@ -20,6 +20,7 @@ class BoardSquare extends Component {
   }
 
   render() {
+    const isGameOn = this.props.gameOn
     const currSquare = this.props.boardConfig[this.props.squareNum - 1]
     let valueToRender
 
@@ -30,9 +31,15 @@ class BoardSquare extends Component {
     else valueToRender = ''
     
     const classSuffix = function() {
-      if (currSquare.open === true || currSquare.flag === true) {
-        if (currSquare.val === 0) return 'zero'
-        else if (currSquare.val > 0) return 'number'
+      if (
+        (
+          currSquare.open === true 
+          || currSquare.flag === true
+        )
+        && isGameOn === true
+        && currSquare.val === 0 
+      ) {
+       return 'zero'
       }
       else return ''
     }()
@@ -52,8 +59,8 @@ class BoardSquare extends Component {
   }
 }
 
-function mapStateToProps({ color, boardConfig }) {
-  return { color, boardConfig }
+function mapStateToProps({ boardConfig, gameOn }) {
+  return { boardConfig, gameOn }
 }
 
 function mapDispatchToProps(dispatch) {

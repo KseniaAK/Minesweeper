@@ -9,6 +9,10 @@
   width: 18em;
   height: 18em;
 
+  &.color-gameOver {
+    background-color: $color-board-gameOver;
+  }
+
   &.color-1 {
     background-color: $color-board-1;
   }
