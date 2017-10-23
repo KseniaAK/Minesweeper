@@ -53,7 +53,7 @@ function getMinedSquares() {
 export function clickBoardSquare(mouseButton, squareNum) {
   return (dispatch, getState) => {
     if (mouseButton === 0) {
-      // TODO: if player opens a mine first click in the game, re-initialize the board
+      // if player opens a mine first click in the game, re-initialize the board
       if (getState().gameOn === false && getState().boardConfig[squareNum - 1].val === 'X') {
         dispatch(initializeBoard())
         dispatch(clickBoardSquare(mouseButton, squareNum))
