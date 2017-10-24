@@ -58,15 +58,17 @@ export function clickBoardSquare(mouseButton, squareNum) {
         dispatch(initializeBoard())
         dispatch(clickBoardSquare(mouseButton, squareNum))
       }
-
-      dispatch(startGame())
+      
+      if (getState().gameOn === false) dispatch(startGame())
 
       // if player clicks with left mouse button, reveal the square
       dispatch(revealSquare(squareNum))
 
-      // In case player revealed square is a mine:
+      // In case player revealed square is a mine
       if (getState().boardConfig[squareNum - 1].val === 'X') {
+        // change board color to red
         dispatch(changeColor('gameOver'))
+        // toggle gameon to false to reveal all squares
         dispatch(gameOver())
       }
     } else if (mouseButton === 2) {
