@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import OneColorOption from '../containers/OneColorOption'
+import styles from './styles/color-options.scss'
 
 export default class ColorOptions extends Component {
   render() {
@@ -10,9 +11,11 @@ export default class ColorOptions extends Component {
     }
 
     return (
-      <div className='color-options'>
-        Change the color of your gameboard:
-        {colorOptions}
+      <div className='color-options-main'>
+        <div className='text'>Change the color of your gameboard:</div>
+        <div className='color-options'>
+          {colorOptions}
+        </div>
       </div>
     )
   }
