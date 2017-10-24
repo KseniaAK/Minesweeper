@@ -6,13 +6,13 @@ import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers/index'
 import thunk from 'redux-thunk'
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
+// const store = createStore(rootReducer, applyMiddleware(thunk))
 
 // To run with Chrome Redux dev tool, run the line below instead
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-// const store = createStore(reducer, /* preloadedState, */ composeEnhancers(
-//   applyMiddleware(...middleware)
-// ))
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(rootReducer, composeEnhancers(
+  applyMiddleware(thunk)
+))
 
 ReactDOM.render(
   <Provider store={store}>
