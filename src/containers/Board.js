@@ -21,7 +21,7 @@ class Board extends Component {
     }
 
     return (
-      <div className={cx('board', 'color-' + this.props.colorNum)}>
+      <div className={cx('board', 'color-' + this.props.colorNum.present)}>
         {boardSquares}
       </div>
     )

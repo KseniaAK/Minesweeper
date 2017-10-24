@@ -1,4 +1,5 @@
 export const CHANGE_COLOR = 'CHANGE_COLOR'
+export const REVERT_COLOR = 'REVERT_COLOR'
 export const INITIALIZE = 'INITIALIZE'
 export const REVEAL = 'REVEAL'
 export const GAME_OVER = 'GAME_OVER'
@@ -11,6 +12,12 @@ export function changeColor(colorNum) {
   return {
     type: CHANGE_COLOR,
     colorNum
+  }
+}
+
+export function revertColor() {
+  return {
+    type: REVERT_COLOR
   }
 }
 
