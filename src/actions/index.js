@@ -5,6 +5,7 @@ export const REVEAL = 'REVEAL'
 export const GAME_OVER = 'GAME_OVER'
 export const WIDTH = 9
 export const FLAG = 'FLAG'
+export const UN_FLAG = 'UN_FLAG'
 export const START_GAME = 'START_GAME'
 const MAX_MINES = 18
 
@@ -80,7 +81,7 @@ export function clickBoardSquare(mouseButton, squareNum) {
       }
     } else if (mouseButton === 2) {
       // if player clicks with right mouse button, flag the square
-      dispatch(flagSquare(squareNum))
+      getState().boardConfig[squareNum - 1].flag ? dispatch(unFlagSquare(squareNum)) : dispatch(flagSquare(squareNum))
     }
   }
 }
@@ -88,6 +89,13 @@ export function clickBoardSquare(mouseButton, squareNum) {
 function flagSquare(squareNum) {
   return {
     type: FLAG,
+    squareNum
+  }
+}
+
+function unFlagSquare(squareNum) {
+  return {
+    type: UN_FLAG,
     squareNum
   }
 }

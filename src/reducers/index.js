@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import ColorReducer from './color_reducer'
-import BoardReducer from './board_reducer'
-import GameReducer from './game_reducer'
+import ColorReducer from './colorReducer'
+import BoardReducer from './boardReducer'
+import GameReducer from './gameReducer'
 
 const rootReducer = combineReducers({
   colorNum: ColorReducer,
