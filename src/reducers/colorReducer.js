@@ -10,6 +10,9 @@ export default function(state = { prev: '', present: ''}, action) {
       })
   
     case REVERT_COLOR:
+      // go back to board color before the player lost and color changed to gameOver
+      // don't care about saving previous color here, as it is gameOver color, not a player-set preference
+      // do not change color on pressing newGame button if previous color was not gameOver
       return Object.assign({}, {
         past: '',
         present: (state.present === 'gameOver') ? state.past : state.present
