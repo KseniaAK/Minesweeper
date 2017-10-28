@@ -26,21 +26,16 @@ class BoardSquare extends Component {
 
     // Only render square's value once user has clicked on it
     if (currSquare.open === true || currSquare.flag === true) {
-      valueToRender = currSquare.val === 0 ? '' : currSquare.val
+      valueToRender = currSquare.valueToRender
     }
-    // squares that touch no mines don't display a number 
-    else valueToRender = ''
     
     // squares that touch no mines are of a different color
     // if game is over, take this color off to have whole board be uniform 'game-over' color
     const classSuffix = function() {
       if (
-        (
-          currSquare.open === true 
-          || currSquare.flag === true
-        )
+        currSquare.open === true
         && isGameOn === true
-        && currSquare.val === 0 
+        && currSquare.val === 0
       ) {
        return 'zero'
       }

@@ -3,7 +3,8 @@ import {
   REVEAL, 
   GAME_OVER, 
   WIDTH, 
-  FLAG
+  FLAG,
+  UN_FLAG
 } from '../actions/index'
 
 function getDefaultState() {
@@ -21,19 +22,30 @@ export default function(state = getDefaultState(), action) {
       return initializeBoard(action.minedSquaresArr)
       
     case REVEAL:
-      newBoardState[action.payload - 1].open = true
+      newBoardState[action.squareNum - 1].open = true
+
+      // if current square touches zero mines - render empty square, not the value which is zero
+      const valueToRender = (state[action.squareNum - 1].val === 0) ? '' : state[action.squareNum - 1].val
+      newBoardState[action.squareNum - 1].valueToRender = valueToRender     
       return newBoardState
 
     case GAME_OVER:
       // reveal all squares
       Object.keys(newBoardState).forEach((key) => {
         newBoardState[key].open = true
+        const valueToRender = (state[key].val === 0) ? '' : state[key].val        
+        newBoardState[key].valueToRender = valueToRender
       })
       return newBoardState
 
     case FLAG:
       newBoardState[action.squareNum - 1].flag = true
-      newBoardState[action.squareNum - 1].val = '?'
+      newBoardState[action.squareNum - 1].valueToRender = '?'
+      return newBoardState
+
+    case UN_FLAG:
+      newBoardState[action.squareNum - 1].flag = false
+      newBoardState[action.squareNum - 1].valueToRender = ''
       return newBoardState
 
     default:
@@ -98,7 +110,8 @@ function initializeBoard(minedSquaresArr) {
         num: i,
         val: 'X',
         open: false,
-        flag: false       
+        flag: false,
+        valueToRender: ''
       })
     }
     // WHen a square does not have a mine, get number of adjacent mines
@@ -107,7 +120,8 @@ function initializeBoard(minedSquaresArr) {
         num: i,
         val: getAdjacentX(i, minedSquaresArr),
         open: false,
-        flag: false     
+        flag: false,
+        valueToRender: ''
       })
     }
   }
