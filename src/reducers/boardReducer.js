@@ -25,6 +25,7 @@ export default function(state = getDefaultState(), action) {
       return newBoardState
 
     case GAME_OVER:
+      // reveal all squares
       Object.keys(newBoardState).forEach((key) => {
         newBoardState[key].open = true
       })
