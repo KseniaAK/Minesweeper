@@ -32,7 +32,7 @@ export function initializeBoard() {
 export function revealSquare(squareNum) {
   return {
     type: REVEAL,
-    payload: squareNum
+    squareNum
   }
 }
 
