@@ -4,9 +4,10 @@ export default function(state = { prev: '', present: ''}, action) {
   switch(action.type) {
     case CHANGE_COLOR:
       // save previous color in case player loses - on new game, want to revert to prev color
+      // if player lost and current color is gameOver - don't allow board color to change until newGame has been started
       return Object.assign({}, {
-        past: state.present,
-        present: action.colorNum
+        past: (state.present === 'gameOver') ? state.past : state.present,
+        present: (state.present === 'gameOver') ? state.present : action.colorNum
       })
   
     case REVERT_COLOR:
