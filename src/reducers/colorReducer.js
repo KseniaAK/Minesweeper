@@ -12,7 +12,7 @@ export default function(state = { prev: '', present: ''}, action) {
     case REVERT_COLOR:
       return Object.assign({}, {
         past: '',
-        present: state.past
+        present: (state.present === 'gameOver') ? state.past : state.present
       })
     default:
       return state
