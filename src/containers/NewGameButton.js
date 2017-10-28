@@ -13,7 +13,6 @@ class NewGameButton extends Component {
       onClick={(event) => {
           this.props.gameOver()
           this.props.initializeBoard()
-          // TODO: only want to revert the color if current one is red!
           this.props.revertColor()
         }}
       >
