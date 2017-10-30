@@ -84,10 +84,10 @@ export function clickBoardSquare(mouseButton, squareNum) {
       // if player clicks with left mouse button, reveal the square
       dispatch(revealSquare(squareNum))
 
-      // if player revealed a zero, propagate and reveal all touching zero squares
+      // if player revealed a zero, propagate and reveal all touching squares
       if (isZero(squareNum)) {
-        const adjacentZeros = getAdjacentZeros(squareNum, WIDTH, getState().boardConfig)
-        adjacentZeros.forEach((square) => {
+        const adjacentSquares = getAdjacentSquares(squareNum, WIDTH)
+        adjacentSquares.forEach((square) => {
           if (isFlagged(square) || isOpen(square)) return
           else dispatch(clickBoardSquare(0, square))
         })
@@ -175,4 +175,48 @@ function getAdjacentZeros(currSquare, width, allSquaresArray) {
     // Check whether adjacent square exists and has zero mines touching it
     return (square && (allSquaresArray[square - 1].val === 0))
   })
+}
+
+function getAdjacentSquares(currSquare, width) {
+  const adjacentSquares = [
+    currSquare - width - 1,
+    currSquare - width,
+    currSquare - width + 1,
+    currSquare - 1,
+    currSquare + 1,
+    currSquare + width - 1,
+    currSquare + width,
+    currSquare + width + 1
+  ]
+
+  // Current square is in the first row - no squares above it
+  if (currSquare - width <= 0) {
+    adjacentSquares[0] = null
+    adjacentSquares[1] = null
+    adjacentSquares[2] = null
+  }
+  
+  // Current square is last one in the row - no squares on its right
+  if (currSquare % width === 0) {
+    adjacentSquares[2] = null
+    adjacentSquares[4] = null
+    adjacentSquares[7] = null
+  }
+  
+  // Current square is first one in the row - no square on its left
+  if (currSquare === 1 || currSquare % width === 1) {
+    adjacentSquares[0] = null
+    adjacentSquares[3] = null
+    adjacentSquares[5] = null    
+  }
+  
+  // Current square is in the last row - no squares below it
+  if (currSquare + width > width * width) {
+    adjacentSquares[5] = null
+    adjacentSquares[6] = null
+    adjacentSquares[7] = null
+  }
+
+  // filter out non-existent (null) square values
+  return adjacentSquares.filter((square) => square)
 }
