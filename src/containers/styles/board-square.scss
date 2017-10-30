@@ -18,4 +18,8 @@
   &.flag {
     background: radial-gradient(pink, white);
   }
+
+  &::selection {
+    background: none;
+  }
 }
