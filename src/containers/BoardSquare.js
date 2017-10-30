@@ -35,10 +35,11 @@ class BoardSquare extends Component {
       if (
         currSquare.open === true
         && isGameOn === true
-        && currSquare.val === 0
-      ) {
-       return 'zero'
-      }
+        && currSquare.valueToRender == 0
+      ) return 'zero'
+      else if (
+        currSquare.valueToRender === '?'
+      ) return 'flag'
       else return ''
     }()
 

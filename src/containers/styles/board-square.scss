@@ -3,6 +3,7 @@
 .board-square {
   display: flex;
   font-family: $font-stack;
+  font-weight: bold;
   height: 2em;
   width: 2em;
   border: 0.04em solid $color-sq-border;
@@ -12,5 +13,9 @@
 
   &.zero {
     background-color: $color-zero-sq;
+  }
+
+  &.flag {
+    background: radial-gradient(pink, white);
   }
 }
