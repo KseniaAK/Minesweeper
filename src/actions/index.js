@@ -65,6 +65,9 @@ export function clickBoardSquare(mouseButton, squareNum) {
     const isFlagged = (squareNum) => (getState().boardConfig[squareNum - 1].flag)
     const isOpen = (squareNum) => (getState().boardConfig[squareNum - 1].open)
 
+    // clicking an open square does nothing
+    if (isOpen(squareNum)) return
+
     // left mouse button
     if (mouseButton === 0) {
       // if square is flagged, do not reveal it
