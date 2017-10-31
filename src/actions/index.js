@@ -1,12 +1,14 @@
+import { WIDTH } from '../appConstants'
+
 export const CHANGE_COLOR = 'CHANGE_COLOR'
 export const REVERT_COLOR = 'REVERT_COLOR'
 export const INITIALIZE = 'INITIALIZE'
 export const REVEAL = 'REVEAL'
 export const GAME_OVER = 'GAME_OVER'
-export const WIDTH = 9
 export const FLAG = 'FLAG'
 export const UN_FLAG = 'UN_FLAG'
 export const START_GAME = 'START_GAME'
+
 const MAX_MINES = 18
 
 export function changeColor(colorNum) {
@@ -42,6 +44,7 @@ export function gameOver() {
   }
 }
 
+// generate a random number within board area limits
 function generateLocation(minedSqArr) {
   // Random number will be the position of a mine
   // Minimum 1, maximum WIDTH * WIDTH
@@ -50,6 +53,7 @@ function generateLocation(minedSqArr) {
   return mineLocation
 }
 
+// get an array of random mined square locations on the board
 function getMinedSquares() {
   const minedSq = []
   for (let i = 0; i < MAX_MINES; i++) {
@@ -131,53 +135,12 @@ function startGame() {
   }
 }
 
-function getAdjacentZeros(currSquare, width, allSquaresArray) {
-  const adjacentSquares = [
-    currSquare - width - 1,
-    currSquare - width,
-    currSquare - width + 1,
-    currSquare - 1,
-    currSquare + 1,
-    currSquare + width - 1,
-    currSquare + width,
-    currSquare + width + 1
-  ]
-
-  // Current square is in the first row - no squares above it
-  if (currSquare - width <= 0) {
-    adjacentSquares[0] = null
-    adjacentSquares[1] = null
-    adjacentSquares[2] = null
-  }
-  
-  // Current square is last one in the row - no squares on its right
-  if (currSquare % width === 0) {
-    adjacentSquares[2] = null
-    adjacentSquares[4] = null
-    adjacentSquares[7] = null
-  }
-  
-  // Current square is first one in the row - no square on its left
-  if (currSquare === 1 || currSquare % width === 1) {
-    adjacentSquares[0] = null
-    adjacentSquares[3] = null
-    adjacentSquares[5] = null    
-  }
-  
-  // Current square is in the last row - no squares below it
-  if (currSquare + width > width * width) {
-    adjacentSquares[5] = null
-    adjacentSquares[6] = null
-    adjacentSquares[7] = null
-  }
-
-  return adjacentSquares.filter((square) => {
-    // Check whether adjacent square exists and has zero mines touching it
-    return (square && (allSquaresArray[square - 1].val === 0))
-  })
-}
-
 function getAdjacentSquares(currSquare, width) {
+  // based on the following scheme of squares
+  // _0_|_1_|_2_
+  // _3_|cur|_4_
+  // _5_|_6_|_7_
+
   const adjacentSquares = [
     currSquare - width - 1,
     currSquare - width,
@@ -190,6 +153,9 @@ function getAdjacentSquares(currSquare, width) {
   ]
 
   // Current square is in the first row - no squares above it
+  // ___|___|___
+  // _3_|cur|_4_
+  // _5_|_6_|_7_
   if (currSquare - width <= 0) {
     adjacentSquares[0] = null
     adjacentSquares[1] = null
@@ -197,6 +163,9 @@ function getAdjacentSquares(currSquare, width) {
   }
   
   // Current square is last one in the row - no squares on its right
+  // _0_|_1_|___
+  // _3_|cur|___
+  // _5_|_6_|___
   if (currSquare % width === 0) {
     adjacentSquares[2] = null
     adjacentSquares[4] = null
@@ -204,6 +173,9 @@ function getAdjacentSquares(currSquare, width) {
   }
   
   // Current square is first one in the row - no square on its left
+  // ___|_1_|_2_
+  // ___|cur|_4_
+  // ___|_6_|_7_
   if (currSquare === 1 || currSquare % width === 1) {
     adjacentSquares[0] = null
     adjacentSquares[3] = null
@@ -211,6 +183,9 @@ function getAdjacentSquares(currSquare, width) {
   }
   
   // Current square is in the last row - no squares below it
+  // _0_|_1_|_2_
+  // _3_|cur|_4_
+  // ___|___|___
   if (currSquare + width > width * width) {
     adjacentSquares[5] = null
     adjacentSquares[6] = null

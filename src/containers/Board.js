@@ -6,6 +6,8 @@ import { initializeBoard } from '../actions/index'
 import classNames from 'classnames/bind'
 import styles from './styles/board.scss'
 
+import { WIDTH } from '../appConstants'
+
 const cx = classNames.bind(styles)
 
 class Board extends Component {
@@ -15,8 +17,7 @@ class Board extends Component {
   
   render() {
     const boardSquares = []
-    const width = 9
-    for (let i = 1; i <= width*width; i++) {
+    for (let i = 1; i <= WIDTH*WIDTH; i++) {
       boardSquares.push(<BoardSquare key={i} squareNum={i} />)
     }
 
