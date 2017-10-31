@@ -1,25 +1,23 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { initializeBoard, gameOver, revertColor } from '../actions/index'
 import styles from './styles/buttons.scss'
 
-class NewGameButton extends Component {
-  render() {
+const NewGameButton = (props) => {
     return (
       <button 
       type='button'
       className='new-game-button'
       onClick={(event) => {
-          this.props.gameOver()
-          this.props.initializeBoard()
-          this.props.revertColor()
+          props.gameOver()
+          props.initializeBoard()
+          props.revertColor()
         }}
       >
         New Game!
       </button>
     )
-  }
 }
 
 function mapDispatchToProps(dispatch) {

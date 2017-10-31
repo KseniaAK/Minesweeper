@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { bindActionCreators } from 'redux'
 import { changeColor } from '../actions/index'
 import { connect } from 'react-redux'
@@ -7,26 +7,14 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-class OneColorOption extends Component {
-  constructor(props) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  handleClick() {
-    // change color of the gameboard
-    this.props.changeColor(this.props.colorNum)
-  }
-
-  render() {
-    return (
-      <button 
-        type='button' 
-        className={cx('one-color-option', 'color-' + this.props.colorNum)}
-        onClick={this.handleClick}
-      />
-    )
-  }
+const OneColorOption = (props) => {
+  return (
+    <button 
+      type='button' 
+      className={cx('one-color-option', 'color-' + props.colorNum)}
+      onClick={(event) => props.changeColor(props.colorNum)}
+    />
+  )
 }
 
 function mapDispatchToProps(dispatch) {
