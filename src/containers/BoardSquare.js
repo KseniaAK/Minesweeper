@@ -13,7 +13,7 @@ class BoardSquare extends Component {
     super(props)
     this.handleMouseDown = this.handleMouseDown.bind(this)
   }
-
+  
   handleMouseDown(event) {
     event.preventDefault()
     this.props.clickBoardSquare(event.button, this.props.squareNum)
