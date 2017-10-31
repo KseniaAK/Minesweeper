@@ -11,6 +11,14 @@ button {
   text-align: center;
   text-decoration: none;
 
+  &:hover {
+    box-shadow: 0px 0px 0px 0.1em $color-background, 0px 0px 0px 0.2em tomato;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
   &.color-1 {
     background-color: $color-board-1;
   }
@@ -23,11 +31,7 @@ button {
     background-color: $color-board-3;
   }
 
-  &:hover {
-    box-shadow: 0px 0px 0px 0.1em $color-background, 0px 0px 0px 0.2em tomato;
-  }
-
-  &:focus {
-    outline: none;
+  &.new-game-button {
+    background-color: tomato;
   }
 }
