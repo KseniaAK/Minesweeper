@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ColorOptions from '../components/ColorOptions'
+import MineOptions from '../components/MineOptions'
 import Board from '../containers/Board'
 import NewGameButton from '../containers/NewGameButton'
 import styles from './styles/app.scss'
@@ -16,6 +17,7 @@ export default class App extends Component {
     return (
       <div className={cx('app')}>
         <ColorOptions />
+        <MineOptions />
         <NewGameButton />
         <Board />
       </div>
