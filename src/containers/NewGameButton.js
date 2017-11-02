@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 import { initializeBoard, gameOver, revertColor } from '../actions/index'
 import styles from './styles/buttons.scss'
 
+import { DEFAULT_MINES } from '../appConstants'
+
 const NewGameButton = (props) => {
     return (
       <button 
@@ -11,7 +13,7 @@ const NewGameButton = (props) => {
       className='new-game-button'
       onClick={(event) => {
           props.gameOver()
-          props.initializeBoard()
+          props.initializeBoard(DEFAULT_MINES)
           props.revertColor()
         }}
       >

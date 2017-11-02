@@ -6,13 +6,14 @@ import { initializeBoard } from '../actions/index'
 import classNames from 'classnames/bind'
 import styles from './styles/board.scss'
 
-import { WIDTH } from '../appConstants'
+import { WIDTH, DEFAULT_MINES } from '../appConstants'
 
 const cx = classNames.bind(styles)
 
 class Board extends Component {
   componentWillMount() {
-    this.props.initializeBoard()
+    // initialize the first game
+    this.props.initializeBoard(DEFAULT_MINES)
   }
   
   render() {
