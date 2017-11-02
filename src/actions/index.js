@@ -8,8 +8,7 @@ export const GAME_OVER = 'GAME_OVER'
 export const FLAG = 'FLAG'
 export const UN_FLAG = 'UN_FLAG'
 export const START_GAME = 'START_GAME'
-
-const MAX_MINES = 18
+export const CHANGE_MINE_NUM = 'CHANGE_MINE_NUM'
 
 export function changeColor(colorNum) {
   return {
@@ -24,10 +23,17 @@ export function revertColor() {
   }
 }
 
-export function initializeBoard() {
+// if player changes the number of mines they want, re-initialize the gameboard
+export function changeMineNumber(mineNum) {
+  return (dispatch) => {
+    dispatch(initializeBoard(mineNum))
+  }
+}
+
+export function initializeBoard(mineNum) {
   return {
     type: INITIALIZE,
-    minedSquaresArr: getMinedSquares()
+    minedSquaresArr: getMinedSquares(mineNum)
   }
 }
 
@@ -54,9 +60,10 @@ function generateLocation(minedSqArr) {
 }
 
 // get an array of random mined square locations on the board
-function getMinedSquares() {
+// passing in the desired number of mines
+function getMinedSquares(mineNum) {
   const minedSq = []
-  for (let i = 0; i < MAX_MINES; i++) {
+  for (let i = 0; i < mineNum; i++) {
     minedSq.push(generateLocation(minedSq))
   }
   return minedSq
