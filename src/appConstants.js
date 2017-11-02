@@ -5,4 +5,7 @@ export const WIDTH = 9
 export const NUM_OF_COLORS = 3
 
 // pre-suggested number of mines for different difficulty levels
-export const MINE_NUMS = [9, 18, 40]
+export const MINE_NUMS = [18, 30, 40]
+
+// default number of mines to initialize the game with
+export const DEFAULT_MINES = MINE_NUMS[0]
