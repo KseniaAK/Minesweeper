@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import styles from './styles/buttons.scss'
 import classNames from 'classnames/bind'
-import { changeMineNumber } from '../actions/index'
+import { changeMineNumber, revertColor, initializeBoard } from '../actions/index'
 
 const cx = classNames.bind(styles)
 
@@ -12,16 +12,24 @@ const OneMineOption = (props) => {
     <button 
       type='button' 
       className={cx('one-mine-option')}
-      onClick={(event) => props.changeMineNumber(props.mineNum)}
+      onClick={(event) => {
+        props.changeMineNumber(props.mineNum)
+        props.initializeBoard(props.mineNum)
+        if (props.gameOn === false) props.revertColor()        
+      }}
     >
       {props.mineNum}
     </button>
   )
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ changeMineNumber }, dispatch)
+function mapStatetoProps({ gameOn }) {
+  return { gameOn }
 }
 
-export default connect(null, mapDispatchToProps)(OneMineOption)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ changeMineNumber, revertColor, initializeBoard }, dispatch)
+}
+
+export default connect(mapStatetoProps, mapDispatchToProps)(OneMineOption)
 // export default OneMineOption
