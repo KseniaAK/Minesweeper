@@ -11,7 +11,13 @@ import { WIDTH } from '../appConstants'
 function getDefaultState() {
   const defaultState = []
   for (let i = 0; i < WIDTH * WIDTH; i++) {
-    defaultState.push(null)
+    defaultState.push({
+      num: null,
+      val: null,
+      open: false,
+      flag: false,
+      valueToRender: ''
+    })
   }
   return defaultState
 }
