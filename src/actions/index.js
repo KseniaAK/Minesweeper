@@ -23,10 +23,11 @@ export function revertColor() {
   }
 }
 
-// if player changes the number of mines they want, re-initialize the gameboard
+// update the selected number of mines in Redux store
 export function changeMineNumber(mineNum) {
-  return (dispatch) => {
-    dispatch(initializeBoard(mineNum))
+  return {
+    type: CHANGE_MINE_NUM,
+    mineNum
   }
 }
 
@@ -86,7 +87,7 @@ export function clickBoardSquare(mouseButton, squareNum) {
 
       // if player opens a mine first click in the game, re-initialize the board
       if (getState().gameOn === false && hasMine) {
-        dispatch(initializeBoard())
+        dispatch(initializeBoard(getState().mineNum))
         return dispatch(clickBoardSquare(mouseButton, squareNum))
       }
       
