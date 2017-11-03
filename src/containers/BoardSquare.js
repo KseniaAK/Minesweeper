@@ -29,6 +29,9 @@ const BoardSquare = (props) => {
     else if (
       currSquare.valueToRender === '?'
     ) return 'flag'
+    else if (
+      currSquare.valueToRender === 'X'
+    ) return 'mine'
     else return ''
   }()
 

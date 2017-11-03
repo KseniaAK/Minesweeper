@@ -19,6 +19,10 @@
     background: radial-gradient(pink, white);
   }
 
+  &.mine {
+    background: radial-gradient(red, $color-board-gameOver);
+  }
+
   &::selection {
     background: none;
   }
