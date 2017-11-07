@@ -1,6 +1,8 @@
 # Minesweeper
 Minesweeper game built with React-Redux
 
+![game in progress](/screenshots/gameInProgress.png "Game in progress")
+
 ### Current Status
 Currently, you can play the game by uncovering the cells - a number would signify the number of mines touching the particular cell. 
 
