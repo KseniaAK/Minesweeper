@@ -11,7 +11,7 @@ const OneMineOption = (props) => {
   return (
     <button 
       type='button' 
-      className={cx('one-mine-option')}
+      className={cx('one-mine-option', props.mineNum === props.selectedMineNum ? 'current' : '')}
       onClick={(event) => {
         props.changeMineNumber(props.mineNum)
         props.initializeBoard(props.mineNum)
@@ -23,8 +23,8 @@ const OneMineOption = (props) => {
   )
 }
 
-function mapStatetoProps({ gameOn }) {
-  return { gameOn }
+function mapStatetoProps({ gameOn, selectedMineNum }) {
+  return { gameOn, selectedMineNum }
 }
 
 function mapDispatchToProps(dispatch) {
