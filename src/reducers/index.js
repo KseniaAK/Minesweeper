@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
   colorNum: ColorReducer,
   boardConfig: BoardReducer,
   gameOn: GameReducer,
-  mineNum: MineReducer
+  selectedMineNum: MineReducer
 })
 
 export default rootReducer

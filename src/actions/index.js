@@ -87,7 +87,7 @@ export function clickBoardSquare(mouseButton, squareNum) {
 
       // if player opens a mine first click in the game, re-initialize the board
       if (getState().gameOn === false && hasMine) {
-        dispatch(initializeBoard(getState().mineNum))
+        dispatch(initializeBoard(getState().selectedMineNum))
         return dispatch(clickBoardSquare(mouseButton, squareNum))
       }
       
