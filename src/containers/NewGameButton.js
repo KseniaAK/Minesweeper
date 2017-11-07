@@ -4,8 +4,6 @@ import { bindActionCreators } from 'redux'
 import { initializeBoard, gameOver, revertColor } from '../actions/index'
 import styles from './styles/buttons.scss'
 
-import { DEFAULT_MINES } from '../appConstants'
-
 const NewGameButton = (props) => {
     return (
       <button 
@@ -13,7 +11,7 @@ const NewGameButton = (props) => {
       className='new-game-button'
       onClick={(event) => {
           props.gameOver()
-          props.initializeBoard(DEFAULT_MINES)
+          props.initializeBoard(props.selectedMineNum)
           props.revertColor()
         }}
       >
@@ -22,8 +20,12 @@ const NewGameButton = (props) => {
     )
 }
 
+function mapStateToProps({ selectedMineNum }) {
+  return { selectedMineNum }
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ initializeBoard, gameOver, revertColor }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(NewGameButton)
+export default connect(mapStateToProps, mapDispatchToProps)(NewGameButton)
