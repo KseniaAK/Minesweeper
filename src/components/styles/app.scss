@@ -2,16 +2,22 @@
 
 .app {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
 
+  // all children should have a margin
   > * {
     margin: 1.3em;
   }
 }
 
-.app-body {
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
+.body {
   display: flex;
   flex-direction: column;
   justify-content: center;

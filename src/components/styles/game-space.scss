@@ -1,0 +1,9 @@
+@import '../../styles/variables';
+
+.game-space {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  flex: 2;
+}

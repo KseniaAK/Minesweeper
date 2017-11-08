@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import ColorOptions from '../components/ColorOptions'
-import MineOptions from '../components/MineOptions'
-import Board from '../containers/Board'
-import NewGameButton from '../containers/NewGameButton'
+import Menu from '../components/Menu'
+import GameSpace from '../components/GameSpace'
 import styles from './styles/app.scss'
 import classNames from 'classnames/bind'
 
@@ -10,16 +8,14 @@ const cx = classNames.bind(styles)
 
 export default class App extends Component {
   componentDidMount() {
-    document.body.classList.add('app-body') 
+    document.body.classList.add('body') 
   }
 
   render() {
     return (
       <div className={cx('app')}>
-        <ColorOptions />
-        <MineOptions />
-        <NewGameButton />
-        <Board />
+        <Menu />
+        <GameSpace />
       </div>
     )
   }
