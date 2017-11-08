@@ -5,6 +5,7 @@ import { clickBoardSquare, initializeBoard, gameOver, changeColor } from '../act
 import classNames from 'classnames/bind'
 
 import styles from './styles/board-square.scss'
+import { WIDTH } from '../appConstants'
 
 const cx = classNames.bind(styles)
 
@@ -20,7 +21,7 @@ const BoardSquare = (props) => {
   
   // squares that touch no mines are of a different color
   // if game is over, take this color off to have whole board be uniform 'game-over' color
-  const classSuffix = function() {
+  const valueClassName = function() {
     if (
       currSquare.open === true
       && isGameOn === true
@@ -35,9 +36,19 @@ const BoardSquare = (props) => {
     else return ''
   }()
 
+  // square's position dictates whether right and/or bottom border should be rendered
+  // allow both class names for bottom right square being both last in row and last in column
+  const positionClassNames = []
+  if (props.squareNum % WIDTH === 0) positionClassNames.push('last-in-row')
+  if (props.squareNum > (WIDTH * WIDTH - WIDTH)) positionClassNames.push('last-in-column')
+
+  // default or player-chosen board background color
+  // render on each square so that there's no chance of board color stepping out of square's boundaries and vice versa
+  const boardColorClassName = 'color-' + props.colorNum.present
+
   return (
     <div 
-      className={cx('board-square', classSuffix)}
+      className={cx('board-square', valueClassName, ...positionClassNames, boardColorClassName)}
       onMouseDown={(event) => {
         event.preventDefault()
         props.clickBoardSquare(event.button, props.squareNum)
@@ -52,8 +63,8 @@ const BoardSquare = (props) => {
   )
 }
 
-function mapStateToProps({ boardConfig, gameOn }) {
-  return { boardConfig, gameOn }
+function mapStateToProps({ boardConfig, gameOn, colorNum }) {
+  return { boardConfig, gameOn, colorNum }
 }
 
 function mapDispatchToProps(dispatch) {

@@ -10,6 +10,7 @@ import { WIDTH, DEFAULT_MINES } from '../appConstants'
 
 const cx = classNames.bind(styles)
 
+console.log(styles)
 class Board extends Component {
   componentWillMount() {
     // initialize the first game
@@ -23,19 +24,15 @@ class Board extends Component {
     }
 
     return (
-      <div className={cx('board', 'color-' + this.props.colorNum.present)}>
+      <div className={cx('board')}>
         {boardSquares}
       </div>
     )
   }
 }
 
-function mapStateToProps({ colorNum }) {
-  return { colorNum }
-}
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ initializeBoard }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Board)
+export default connect(null, mapDispatchToProps)(Board)
