@@ -4,6 +4,7 @@ button {
   display: inline-block;
   font-family: $font-stack;
   font-size: 1.3em;
+  background-color: $color-button-default;
   border: none;
   color: $color-text;
   padding: 0.5em 1em;
@@ -12,7 +13,7 @@ button {
   text-decoration: none;
 
   &:hover {
-    box-shadow: 0px 0px 0px 0.1em $color-background, 0px 0px 0px 0.2em tomato;
+    box-shadow: 0px 0px 0px 0.1em $color-background, 0px 0px 0px 0.2em $color-button-outline;
   }
 
   &:focus {
@@ -29,10 +30,6 @@ button {
 
   &.color-3 {
     background-color: $color-board-3;
-  }
-
-  &.new-game-button {
-    background-color: tomato;
   }
 
   &.one-mine-option {
