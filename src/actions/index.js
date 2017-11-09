@@ -72,7 +72,7 @@ function getMinedSquares(mineNum) {
 
 export function clickBoardSquare(mouseButton, squareNum) {
   return (dispatch, getState) => {
-    const hasMine = (getState().boardConfig[squareNum - 1].val === 'X')
+    const hasMine = (squareNum) => (getState().boardConfig[squareNum - 1].val === 'X')
     const isZero = (squareNum) => (getState().boardConfig[squareNum - 1].val === 0)
     const isFlagged = (squareNum) => (getState().boardConfig[squareNum - 1].flag)
     const isOpen = (squareNum) => (getState().boardConfig[squareNum - 1].open)
@@ -86,7 +86,7 @@ export function clickBoardSquare(mouseButton, squareNum) {
       if (isFlagged(squareNum)) return
 
       // if player opens a mine first click in the game, re-initialize the board
-      if (getState().gameOn === false && hasMine) {
+      if (getState().gameOn === false && hasMine(squareNum)) {
         dispatch(initializeBoard(getState().selectedMineNum))
         return dispatch(clickBoardSquare(mouseButton, squareNum))
       }
@@ -106,7 +106,7 @@ export function clickBoardSquare(mouseButton, squareNum) {
       }
 
       // In case player revealed square is a mine
-      if (hasMine) {
+      if (hasMine(squareNum)) {
         // change board color to indicate loss
         dispatch(changeColor('gameOver'))
         // toggle gameOn to false to reveal all squares
@@ -119,6 +119,44 @@ export function clickBoardSquare(mouseButton, squareNum) {
       // flag the square if player clicks with right mouse button for the first time on a given square
       // UNflag if this is second right-button click on the given square
       isFlagged(squareNum) ? dispatch(unFlagSquare(squareNum)) : dispatch(flagSquare(squareNum))
+    }
+  }
+}
+
+// when player double-clicks a square, reveal all adjacent non-mine, un-flagged squares
+export function doubleClickBoardSquare(squareNum) {  
+  return (dispatch, getState) => {
+    const hasMine = (squareNum) => (getState().boardConfig[squareNum - 1].val === 'X')
+    const isZero = (squareNum) => (getState().boardConfig[squareNum - 1].val === 0)
+    const isFlagged = (squareNum) => (getState().boardConfig[squareNum - 1].flag)
+    const isOpen = (squareNum) => (getState().boardConfig[squareNum - 1].open)
+    const getValue = (squareNum) => (getState().boardConfig[squareNum - 1].val)
+
+    const hasEnoughAdjacentFlags = (requiredFlagsNum, squareNum) => {
+      const adjacentSquares = getAdjacentSquares(squareNum, WIDTH)
+
+      // count how many adjacent squares are flagged
+      const actualAdjacentFlagsNum = adjacentSquares.reduce((total, square) => {
+        if (isFlagged(square)) return total + 1
+        else return total
+      }, 0)
+
+      // if number of flagged adjacent squares is equal to the dbl-clicked square's numeric value
+      // then enough have been flagged
+      if (actualAdjacentFlagsNum === requiredFlagsNum) return true
+      else return false
+    }
+    
+    if (isOpen(squareNum)
+      && !isZero(squareNum)
+      && hasEnoughAdjacentFlags(getValue(squareNum), squareNum)
+    ) {
+      const adjacentSquares = getAdjacentSquares(squareNum, WIDTH)
+      adjacentSquares.forEach((square) => {
+        if (!isFlagged(square)) {
+          dispatch(clickBoardSquare(0, square))
+        }
+      })
     }
   }
 }

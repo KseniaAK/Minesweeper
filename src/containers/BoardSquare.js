@@ -1,7 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { clickBoardSquare, initializeBoard, gameOver, changeColor } from '../actions/index'
+import { 
+  clickBoardSquare, 
+  initializeBoard, 
+  gameOver, 
+  changeColor, 
+  doubleClickBoardSquare
+} from '../actions/index'
 import classNames from 'classnames/bind'
 
 import styles from './styles/board-square.scss'
@@ -53,6 +59,9 @@ const BoardSquare = (props) => {
         event.preventDefault()
         props.clickBoardSquare(event.button, props.squareNum)
       }}
+      onDoubleClick={(event) => {
+        props.doubleClickBoardSquare(props.squareNum)
+      }}
       onContextMenu={(event) => {
         event.preventDefault()
         return false
@@ -68,7 +77,13 @@ function mapStateToProps({ boardConfig, gameOn, colorNum }) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ clickBoardSquare, initializeBoard, gameOver, changeColor }, dispatch)
+  return bindActionCreators({ 
+    clickBoardSquare, 
+    initializeBoard, 
+    gameOver, 
+    changeColor, 
+    doubleClickBoardSquare
+  }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardSquare)
