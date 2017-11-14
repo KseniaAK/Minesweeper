@@ -1,19 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope');
 
 // base colors
-$color-background: #f5f5dc; // beige
+$color-background: #fff9eb;
+$color-menu: #fff4dc; // slightly darker than the background
 $color-text: #4E1B6B; // dark purple
-$color-button-default: #afeeee; // paleturquoise
+$color-button-default: #ace4ef;
 $color-button-outline: #ff6347; // tomato
 
 // board-square special colors
-$color-zero-sq: #CF86FF; // purple
-$color-sq-border: rgb(136, 132, 132); // gray
+$color-zero-sq: #CF86FF;
+$color-sq-border: rgb(136, 132, 132);
 
 // board colors (options)
 $color-board-gameOver: #ff6347; // tomato
-$color-board-1: #7fffd4; // aquamarine
-$color-board-2: #85b7f0; // some kind of blue
-$color-board-3: #dda0dd; // plum
+$color-board-1: #B7FFD8;
+$color-board-2: #C4F5FC;
+$color-board-3: #E2A0FF;
 
 $font-stack: 'Annie Use Your Telescope', cursive;
