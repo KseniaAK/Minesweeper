@@ -6,4 +6,11 @@
   justify-content: center;
   align-items: flex-start;
   height: 100vh;
+  background-color: $color-menu;
+  border-right: 0.04em solid $color-sq-border;
+  font-size: 1.2em;
+
+  > * {
+    margin: 1em;
+  }
 }

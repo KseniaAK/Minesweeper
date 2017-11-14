@@ -1,22 +1,20 @@
 @import '../../styles/variables';
 
+// this is the main element of the React app
 .app {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-
-  // all children should have a margin
-  > * {
-    margin: 1.3em;
-  }
 }
 
+// this is the element into which React app is injected
 #root {
   height: 100vh;
   width: 100vw;
 }
 
+// this is the html document body
 .body {
   display: flex;
   flex-direction: column;
@@ -26,4 +24,5 @@
   height: 100vh;
   font-family: $font-stack;
   color: $color-text;
+  margin: 0;
 }
