@@ -6,21 +6,21 @@ import { initializeBoard } from '../actions/index'
 import classNames from 'classnames/bind'
 import styles from './styles/board.scss'
 
-import { WIDTH_OPTIONS } from '../appConstants'
+import { WIDTH_OPTIONS, DEFAULT_MINES } from '../appConstants'
 
 const cx = classNames.bind(styles)
 
 class Board extends Component {
   componentWillMount() {
     // initialize the first game
-    this.props.initializeBoard(WIDTH_OPTIONS[0])
+    // feed in desired MINE number
+    this.props.initializeBoard(DEFAULT_MINES)
   }
   
   render() {
     const width = this.props.selectedWidth
     const boardSquares = []
 
-    console.log(WIDTH_OPTIONS.indexOf(width))
     // assemble board squares in a list, sequentially from 1 to last square to fit in board area
     for (let i = 1; i <= width * width; i++) {
       // for rendering square borders, important to know whether square is last in row or column
