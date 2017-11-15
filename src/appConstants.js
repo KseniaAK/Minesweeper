@@ -1,6 +1,5 @@
 // width of the gameboard in number of squares
-export const WIDTH = 9
-export const WIDTH_OPTIONS = [9, 15, 20]
+export const WIDTH_OPTIONS = [9, 14, 19]
 
 // number of colors to select from for gameboard background color
 export const NUM_OF_COLORS = 3
