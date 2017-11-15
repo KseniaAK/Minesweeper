@@ -13,9 +13,9 @@ const WidthOptions = () => {
   }
 
   return (
-    <div className='mine-options-main'>
+    <div className='options-main'>
       <div className='text'>Select the width:</div>
-      <div className='mine-options'>
+      <div className='options'>
         {widthOptions}
       </div>
     </div>

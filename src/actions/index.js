@@ -9,6 +9,7 @@ export const FLAG = 'FLAG'
 export const UN_FLAG = 'UN_FLAG'
 export const START_GAME = 'START_GAME'
 export const CHANGE_MINE_NUM = 'CHANGE_MINE_NUM'
+export const CHANGE_WIDTH = 'CHANGE_WIDTH'
 
 export function changeColor(colorNum) {
   return {
@@ -28,6 +29,14 @@ export function changeMineNumber(mineNum) {
   return {
     type: CHANGE_MINE_NUM,
     mineNum
+  }
+}
+
+// update the selected board width in Redux store
+export function changeWidth(width) {
+  return {
+    type: CHANGE_WIDTH,
+    width
   }
 }
 
