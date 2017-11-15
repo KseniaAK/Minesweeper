@@ -6,7 +6,19 @@
   border: none;
   margin: 1em;
 
-  // current board is 9x9 squares, 2em by 2em each square
-  width: 18em;
-  height: 18em;
+  // for different board sizes: width * height squares, 2em by 2em each square
+  &.width-0 {
+    width: 18em;
+    height: 18em;
+  }
+
+  &.width-1 {
+    width: 28em;
+    height: 28em;
+  }
+
+  &.width-2 {
+    width: 38em;
+    height: 38em;
+  }
 }

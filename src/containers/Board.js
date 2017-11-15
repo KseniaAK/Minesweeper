@@ -6,23 +6,25 @@ import { initializeBoard } from '../actions/index'
 import classNames from 'classnames/bind'
 import styles from './styles/board.scss'
 
-import { DEFAULT_MINES } from '../appConstants'
+import { WIDTH_OPTIONS } from '../appConstants'
 
 const cx = classNames.bind(styles)
 
 class Board extends Component {
   componentWillMount() {
     // initialize the first game
-    this.props.initializeBoard(DEFAULT_MINES)
+    this.props.initializeBoard(WIDTH_OPTIONS[0])
   }
   
   render() {
     const width = this.props.selectedWidth
     const boardSquares = []
 
+    console.log(WIDTH_OPTIONS.indexOf(width))
     // assemble board squares in a list, sequentially from 1 to last square to fit in board area
     for (let i = 1; i <= width * width; i++) {
       // for rendering square borders, important to know whether square is last in row or column
+      // assume square board shape
       let lastInRow = false
       let lastInColumn = false
       
@@ -38,7 +40,10 @@ class Board extends Component {
       }
       
     return (
-      <div className={cx('board')}>
+      <div className={cx(
+          'board', 
+          'width-' + WIDTH_OPTIONS.indexOf(width)
+        )}>
         {boardSquares}
       </div>
     )
