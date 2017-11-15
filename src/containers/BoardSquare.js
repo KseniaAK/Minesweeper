@@ -3,15 +3,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { 
   clickBoardSquare, 
-  initializeBoard, 
-  gameOver, 
-  changeColor, 
   doubleClickBoardSquare
 } from '../actions/index'
 import classNames from 'classnames/bind'
-
 import styles from './styles/board-square.scss'
-import { WIDTH } from '../appConstants'
 
 const cx = classNames.bind(styles)
 
@@ -45,8 +40,8 @@ const BoardSquare = (props) => {
   // square's position dictates whether right and/or bottom border should be rendered
   // allow both class names for bottom right square being both last in row and last in column
   const positionClassNames = []
-  if (props.squareNum % WIDTH === 0) positionClassNames.push('last-in-row')
-  if (props.squareNum > (WIDTH * WIDTH - WIDTH)) positionClassNames.push('last-in-column')
+  if (props.lastInRow) positionClassNames.push('last-in-row')
+  if (props.lastInColumn) positionClassNames.push('last-in-column')
 
   // default or player-chosen board background color
   // render on each square so that there's no chance of board color stepping out of square's boundaries and vice versa
@@ -79,9 +74,6 @@ function mapStateToProps({ boardConfig, gameOn, colorNum }) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ 
     clickBoardSquare, 
-    initializeBoard, 
-    gameOver, 
-    changeColor, 
     doubleClickBoardSquare
   }, dispatch)
 }

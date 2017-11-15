@@ -6,11 +6,11 @@ import {
   UN_FLAG
 } from '../actions/index'
 
-import { WIDTH } from '../appConstants'
+import { WIDTH_OPTIONS } from '../appConstants'
 
 function getDefaultState() {
   const defaultState = []
-  for (let i = 0; i < WIDTH * WIDTH; i++) {
+  for (let i = 0; i < WIDTH_OPTIONS[0] * WIDTH_OPTIONS[0]; i++) {
     defaultState.push({
       num: null,
       val: null,
@@ -28,7 +28,7 @@ export default function(state = getDefaultState(), action) {
 
     //set the board up for a new game
     case INITIALIZE:
-      return initializeBoard(action.minedSquaresArr)
+      return initializeBoard(action.minedSquaresArr, action.width)
       
     case REVEAL:
       newBoardState[action.squareNum - 1].open = true
@@ -62,41 +62,41 @@ export default function(state = getDefaultState(), action) {
   }
 }
 
-function getAdjacentX(currSquare, minedSqArr) {
+function getAdjacentX(currSquare, minedSqArr, width) {
   const adjacentSquares = [
-    currSquare - WIDTH - 1,
-    currSquare - WIDTH,
-    currSquare - WIDTH + 1,
+    currSquare - width - 1,
+    currSquare - width,
+    currSquare - width + 1,
     currSquare - 1,
     currSquare + 1,
-    currSquare + WIDTH - 1,
-    currSquare + WIDTH,
-    currSquare + WIDTH + 1
+    currSquare + width - 1,
+    currSquare + width,
+    currSquare + width + 1
   ]
 
   // Current square is in the first row - no squares above it
-  if (currSquare - WIDTH <= 0) {
+  if (currSquare - width <= 0) {
     adjacentSquares[0] = null
     adjacentSquares[1] = null
     adjacentSquares[2] = null
   }
   
   // Current square is last one in the row - no squares on its right
-  if (currSquare % WIDTH === 0) {
+  if (currSquare % width === 0) {
     adjacentSquares[2] = null
     adjacentSquares[4] = null
     adjacentSquares[7] = null
   }
   
   // Current square is first one in the row - no square on its left
-  if (currSquare === 1 || currSquare % WIDTH === 1) {
+  if (currSquare === 1 || currSquare % width === 1) {
     adjacentSquares[0] = null
     adjacentSquares[3] = null
     adjacentSquares[5] = null    
   }
   
   // Current square is in the last row - no squares below it
-  if (currSquare + WIDTH > WIDTH * WIDTH) {
+  if (currSquare + width > width * width) {
     adjacentSquares[5] = null
     adjacentSquares[6] = null
     adjacentSquares[7] = null
@@ -110,10 +110,10 @@ function getAdjacentX(currSquare, minedSqArr) {
   }, 0)
 }
 
-function initializeBoard(minedSquaresArr) {
+function initializeBoard(minedSquaresArr, width) {
   const freshBoard = []
 
-  for (let i = 1; i <= WIDTH * WIDTH; i++) {
+  for (let i = 1; i <= width * width; i++) {
     // When a square has a mine
     if (minedSquaresArr.indexOf(i) !== -1) {
       freshBoard.push({
@@ -128,7 +128,7 @@ function initializeBoard(minedSquaresArr) {
     else {
       freshBoard.push({
         num: i,
-        val: getAdjacentX(i, minedSquaresArr),
+        val: getAdjacentX(i, minedSquaresArr, width),
         open: false,
         flag: false,
         valueToRender: ''

@@ -1,5 +1,3 @@
-import { WIDTH } from '../appConstants'
-
 export const CHANGE_COLOR = 'CHANGE_COLOR'
 export const REVERT_COLOR = 'REVERT_COLOR'
 export const INITIALIZE = 'INITIALIZE'
@@ -40,11 +38,15 @@ export function changeWidth(width) {
   }
 }
 
+// since user is allowed to change board width, we need to get it dynamiccaly from store
 export function initializeBoard(mineNum) {
-  return {
-    type: INITIALIZE,
-    minedSquaresArr: getMinedSquares(mineNum)
-  }
+  return (dispatch, getState) => {
+    dispatch({
+      type: INITIALIZE,
+      minedSquaresArr: getMinedSquares(mineNum, getState().selectedWidth),
+      width: getState().selectedWidth
+    })
+  } 
 }
 
 export function revealSquare(squareNum) {
@@ -61,20 +63,20 @@ export function gameOver() {
 }
 
 // generate a random number within board area limits
-function generateLocation(minedSqArr) {
+function generateLocation(minedSqArr, width) {
   // Random number will be the position of a mine
-  // Minimum 1, maximum WIDTH * WIDTH
-  const mineLocation = Math.floor(Math.random() * (WIDTH * WIDTH) + 1)
+  // Minimum 1, maximum is width * width
+  const mineLocation = Math.floor(Math.random() * (width * width) + 1)
   if (minedSqArr.indexOf(mineLocation) !== -1) return generateLocation(minedSqArr)
   return mineLocation
 }
 
 // get an array of random mined square locations on the board
 // passing in the desired number of mines
-function getMinedSquares(mineNum) {
+function getMinedSquares(mineNum, width) {
   const minedSq = []
   for (let i = 0; i < mineNum; i++) {
-    minedSq.push(generateLocation(minedSq))
+    minedSq.push(generateLocation(minedSq, width))
   }
   return minedSq
 }
@@ -107,7 +109,7 @@ export function clickBoardSquare(mouseButton, squareNum) {
 
       // if player revealed a zero, propagate and reveal all touching squares
       if (isZero(squareNum)) {
-        const adjacentSquares = getAdjacentSquares(squareNum, WIDTH)
+        const adjacentSquares = getAdjacentSquares(squareNum, getState().selectedWidth)
         adjacentSquares.forEach((square) => {
           if (isFlagged(square) || isOpen(square)) return
           else dispatch(clickBoardSquare(0, square))
@@ -142,7 +144,7 @@ export function doubleClickBoardSquare(squareNum) {
     const getValue = (squareNum) => (getState().boardConfig[squareNum - 1].val)
 
     const hasEnoughAdjacentFlags = (requiredFlagsNum, squareNum) => {
-      const adjacentSquares = getAdjacentSquares(squareNum, WIDTH)
+      const adjacentSquares = getAdjacentSquares(squareNum, getState().selectedWidth)
 
       // count how many adjacent squares are flagged
       const actualAdjacentFlagsNum = adjacentSquares.reduce((total, square) => {
@@ -160,7 +162,7 @@ export function doubleClickBoardSquare(squareNum) {
       && !isZero(squareNum)
       && hasEnoughAdjacentFlags(getValue(squareNum), squareNum)
     ) {
-      const adjacentSquares = getAdjacentSquares(squareNum, WIDTH)
+      const adjacentSquares = getAdjacentSquares(squareNum, getState().selectedWidth)
       adjacentSquares.forEach((square) => {
         if (!isFlagged(square)) {
           dispatch(clickBoardSquare(0, square))
