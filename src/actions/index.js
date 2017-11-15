@@ -41,10 +41,11 @@ export function changeWidth(width) {
 // since user is allowed to change board width, we need to get it dynamiccaly from store
 export function initializeBoard(mineNum) {
   return (dispatch, getState) => {
+    const width = getState().selectedWidth
     dispatch({
       type: INITIALIZE,
-      minedSquaresArr: getMinedSquares(mineNum, getState().selectedWidth),
-      width: getState().selectedWidth
+      minedSquaresArr: getMinedSquares(mineNum, width),
+      width
     })
   } 
 }
@@ -67,7 +68,7 @@ function generateLocation(minedSqArr, width) {
   // Random number will be the position of a mine
   // Minimum 1, maximum is width * width
   const mineLocation = Math.floor(Math.random() * (width * width) + 1)
-  if (minedSqArr.indexOf(mineLocation) !== -1) return generateLocation(minedSqArr)
+  if (minedSqArr.indexOf(mineLocation) !== -1) return generateLocation(minedSqArr, width)
   return mineLocation
 }
 
