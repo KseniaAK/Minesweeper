@@ -13,9 +13,8 @@ const OneWidthOption = (props) => {
       type='button' 
       className={cx('one-option', props.widthOpt === props.selectedWidth ? 'current' : '')}
       onClick={(event) => {
-        console.log('should be passing this:', props.widthOpt)
         props.changeWidth(props.widthOpt)
-        props.initializeBoard(props.widthOpt)
+        props.initializeBoard(props.selectedMineNum)
         if (props.gameOn === false) props.revertColor()        
       }}
     >
@@ -24,8 +23,8 @@ const OneWidthOption = (props) => {
   )
 }
 
-function mapStateToProps({ gameOn, selectedWidth }) {
-  return { gameOn, selectedWidth }
+function mapStateToProps({ gameOn, selectedWidth, selectedMineNum }) {
+  return { gameOn, selectedWidth, selectedMineNum }
 }
 
 function mapDispatchToProps(dispatch) {
