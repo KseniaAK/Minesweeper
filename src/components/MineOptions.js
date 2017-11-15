@@ -13,9 +13,9 @@ const MineOptions = () => {
   }
 
   return (
-    <div className='mine-options-main'>
+    <div className='options-main'>
       <div className='text'>Select the number of mines:</div>
-      <div className='mine-options'>
+      <div className='options'>
         {mineOptions}
       </div>
     </div>

@@ -11,7 +11,7 @@ const OneMineOption = (props) => {
   return (
     <button 
       type='button' 
-      className={cx('one-mine-option', props.mineNum === props.selectedMineNum ? 'current' : '')}
+      className={cx('one-option', props.mineNum === props.selectedMineNum ? 'current' : '')}
       onClick={(event) => {
         props.changeMineNumber(props.mineNum)
         props.initializeBoard(props.mineNum)
@@ -23,7 +23,7 @@ const OneMineOption = (props) => {
   )
 }
 
-function mapStatetoProps({ gameOn, selectedMineNum }) {
+function mapStateToProps({ gameOn, selectedMineNum }) {
   return { gameOn, selectedMineNum }
 }
 
@@ -31,5 +31,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ changeMineNumber, revertColor, initializeBoard }, dispatch)
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(OneMineOption)
-// export default OneMineOption
+export default connect(mapStateToProps, mapDispatchToProps)(OneMineOption)
