@@ -1,4 +1,7 @@
+// main font of the page
 @import url('https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope');
+
+// using this font to show flags and little fires for mines
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 // base colors
@@ -13,13 +16,21 @@ $color-zero-sq: #CF86FF;
 $color-sq-border: rgb(136, 132, 132);
 
 // board colors (options)
-$color-board-gameOver: #ff6347; // tomato
-$color-board-0: white; // this is the default that the board initializes to
+$color-board-gameOver: #dc7664; 
+$color-board-0: white; // this is the default that the board initializes to in redux
 $color-board-1: #B7FFD8;
 $color-board-2: #C4F5FC;
 $color-board-3: #E2A0FF;
-$color-flag-1: #2ade32;
-$color-flag-2: #219eff;
+
+// individual square colors
+$color-flag-0: $color-button-default;
+$color-flag-1: #f559df;
+$color-flag-2: #ff8804;
 $color-flag-3: #ff647f;
+
+$color-open-0: #e2e2e2;
+$color-open-1: #4df79a;
+$color-open-2: #7feaf9;
+$color-open-3: #CF86FF;
 
 $font-stack: 'Annie Use Your Telescope', cursive;

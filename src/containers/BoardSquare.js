@@ -29,8 +29,7 @@ const BoardSquare = (props) => {
   if (
     currSquare.open === true
     && isGameOn === true
-    && currSquare.valueToRender == 0
-  ) valueClassNames = ['zero']
+  ) valueClassNames = ['open']
   else if (currSquare.valueToRender === 'flag') {
     valueClassNames = ['flag', 'material-icons']
   } else if (currSquare.valueToRender === MINE) {

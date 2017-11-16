@@ -28,27 +28,31 @@
     border-bottom: 0.04em solid $color-sq-border;
     margin-bottom: -0.04em;    
   }
-
+  
   &::selection {
     background: none;
   }
-
-  // colors based on square value
-  &.zero {
-    background-color: $color-zero-sq !important;
+  
+  &.color-gameOver {
+    background-color: $color-board-gameOver;
   }
 
+  // mines are only shown on game over, so they blend in with game over color
   &.mine {
-    background: radial-gradient(red, $color-board-gameOver);
+    background: radial-gradient(red, $color-board-gameOver 80%);
   }
 
   // default board color
   &.color-0 {
     background-color: $color-board-0;
 
-    // flagged ssquares have gradient that blends into the background
+    // flagged squares have gradient that blends into the background
     &.flag {
-      background: radial-gradient(pink, $color-board-0);
+      background: radial-gradient($color-flag-0, $color-board-0);
+    }
+
+    &.open {
+      background-color: $color-open-0 !important;
     }
   }
   
@@ -60,6 +64,10 @@
     &.flag {
       background: radial-gradient($color-flag-1, $color-board-1);
     }
+
+    &.open {
+      background-color: $color-open-1 !important;
+    }
   }
 
   &.color-2 {
@@ -68,6 +76,10 @@
     // flagged squares have gradient that blends into the background
     &.flag {
       background: radial-gradient($color-flag-2, $color-board-2);
+    }
+
+    &.open {
+      background-color: $color-open-2 !important;
     }
   }
 
@@ -78,9 +90,9 @@
     &.flag {
       background: radial-gradient($color-flag-3, $color-board-3);
     }
-  }
 
-  &.color-gameOver {
-    background-color: $color-board-gameOver;
+    &.open {
+      background-color: $color-open-3 !important;
+    }
   }
 }
