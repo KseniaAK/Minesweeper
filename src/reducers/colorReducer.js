@@ -1,6 +1,8 @@
 import { CHANGE_COLOR, REVERT_COLOR } from '../actions/index'
 
-export default function(state = { prev: '', present: ''}, action) {
+// default initial color is numbered 0 in CSS color constants
+
+export default function(state = { prev: '', present: '0'}, action) {
   switch(action.type) {
     case CHANGE_COLOR:
       // save previous color in case player loses - on new game, want to revert to prev color
