@@ -6,7 +6,7 @@ import {
   UN_FLAG
 } from '../actions/index'
 
-import { WIDTH_OPTIONS } from '../appConstants'
+import { WIDTH_OPTIONS, MINE } from '../appConstants'
 
 function getDefaultState() {
   const defaultState = []
@@ -33,7 +33,7 @@ export default function(state = getDefaultState(), action) {
     case REVEAL:
       newBoardState[action.squareNum - 1].open = true
 
-      // if current square touches zero mines - render empty square, not the value which is zero
+      // if current square touches zero mines - render empty square, not the value (which is zero)
       const valueToRender = (state[action.squareNum - 1].val === 0) ? '' : state[action.squareNum - 1].val
       newBoardState[action.squareNum - 1].valueToRender = valueToRender     
       return newBoardState
@@ -49,7 +49,7 @@ export default function(state = getDefaultState(), action) {
 
     case FLAG:
       newBoardState[action.squareNum - 1].flag = true
-      newBoardState[action.squareNum - 1].valueToRender = '?'
+      newBoardState[action.squareNum - 1].valueToRender = 'flag'
       return newBoardState
 
     case UN_FLAG:
@@ -62,6 +62,7 @@ export default function(state = getDefaultState(), action) {
   }
 }
 
+// figure out which immediatly adjacent squares are mines
 function getAdjacentX(currSquare, minedSqArr, width) {
   const adjacentSquares = [
     currSquare - width - 1,
@@ -118,7 +119,7 @@ function initializeBoard(minedSquaresArr, width) {
     if (minedSquaresArr.indexOf(i) !== -1) {
       freshBoard.push({
         num: i,
-        val: 'X',
+        val: MINE,
         open: false,
         flag: false,
         valueToRender: ''

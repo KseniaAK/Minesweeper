@@ -1,11 +1,12 @@
 @import '../../styles/variables';
 
 .board-square {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   font-family: $font-stack;
   font-weight: bold;
+  font-size: 1em !important;
   height: 2em;
   width: 2em;
   

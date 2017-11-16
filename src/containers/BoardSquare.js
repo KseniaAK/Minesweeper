@@ -8,6 +8,8 @@ import {
 import classNames from 'classnames/bind'
 import styles from './styles/board-square.scss'
 
+import { MINE } from '../appConstants'
+
 const cx = classNames.bind(styles)
 
 const BoardSquare = (props) => {
@@ -21,21 +23,19 @@ const BoardSquare = (props) => {
   }
   
   // squares that touch no mines are of a different color
+  // squares with flags and mines require a different font stack
   // if game is over, take this color off to have whole board be uniform 'game-over' color
-  const valueClassName = function() {
-    if (
-      currSquare.open === true
-      && isGameOn === true
-      && currSquare.valueToRender == 0
-    ) return 'zero'
-    else if (
-      currSquare.valueToRender === '?'
-    ) return 'flag'
-    else if (
-      currSquare.valueToRender === 'X'
-    ) return 'mine'
-    else return ''
-  }()
+  let valueClassNames = []
+  if (
+    currSquare.open === true
+    && isGameOn === true
+    && currSquare.valueToRender == 0
+  ) valueClassNames = ['zero']
+  else if (currSquare.valueToRender === 'flag') {
+    valueClassNames = ['flag', 'material-icons']
+  } else if (currSquare.valueToRender === MINE) {
+    valueClassNames = ['mine', 'material-icons']
+  }
 
   // square's position dictates whether right and/or bottom border should be rendered
   // allow both class names for bottom right square being both last in row and last in column
@@ -49,7 +49,7 @@ const BoardSquare = (props) => {
 
   return (
     <div 
-      className={cx('board-square', valueClassName, ...positionClassNames, boardColorClassName)}
+      className={cx('board-square', ...valueClassNames, ...positionClassNames, boardColorClassName)}
       onMouseDown={(event) => {
         event.preventDefault()
         props.clickBoardSquare(event.button, props.squareNum)

@@ -1,3 +1,5 @@
+import { MINE } from '../appConstants'
+
 export const CHANGE_COLOR = 'CHANGE_COLOR'
 export const REVERT_COLOR = 'REVERT_COLOR'
 export const INITIALIZE = 'INITIALIZE'
@@ -84,7 +86,7 @@ function getMinedSquares(mineNum, width) {
 
 export function clickBoardSquare(mouseButton, squareNum) {
   return (dispatch, getState) => {
-    const hasMine = (squareNum) => (getState().boardConfig[squareNum - 1].val === 'X')
+    const hasMine = (squareNum) => (getState().boardConfig[squareNum - 1].val === MINE)
     const isZero = (squareNum) => (getState().boardConfig[squareNum - 1].val === 0)
     const isFlagged = (squareNum) => (getState().boardConfig[squareNum - 1].flag)
     const isOpen = (squareNum) => (getState().boardConfig[squareNum - 1].open)

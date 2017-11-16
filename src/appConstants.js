@@ -9,3 +9,6 @@ export const MINE_NUMS = [18, 30, 40]
 
 // default number of mines to initialize the game with
 export const DEFAULT_MINES = MINE_NUMS[0]
+
+// word that translates into a fire/mine looking font character
+export const MINE = 'whatshot'
