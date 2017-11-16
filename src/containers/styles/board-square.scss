@@ -1,6 +1,7 @@
 @import '../../styles/variables';
 
 .board-square {
+  // some values have to set as more important in order to over-write Material.IO icon font defaults
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -10,13 +11,9 @@
   height: 2em;
   width: 2em;
   
-  // default board color
-  background-color: white;
-  
   // only set top and left borders on the squares
   // bottom and right borders are set on the board itself
   // this way borders don't overlap/double-count
-  // and we don't need to calculate which squares need a bottom and right border
   border-top: 0.04em solid $color-sq-border;
   border-left: 0.04em solid $color-sq-border;
   margin-top: -0.04em;
@@ -41,25 +38,46 @@
     background-color: $color-zero-sq !important;
   }
 
-  &.flag {
-    background: radial-gradient(pink, white);
-  }
-
   &.mine {
     background: radial-gradient(red, $color-board-gameOver);
   }
 
+  // default board color
+  &.color-0 {
+    background-color: $color-board-0;
+
+    // flagged ssquares have gradient that blends into the background
+    &.flag {
+      background: radial-gradient(pink, $color-board-0);
+    }
+  }
+  
   // user-selected background colors 1, 2, 3:
   &.color-1 {
     background-color: $color-board-1;
+
+    // flagged squares have gradient that blends into the background
+    &.flag {
+      background: radial-gradient($color-flag-1, $color-board-1);
+    }
   }
 
   &.color-2 {
     background-color: $color-board-2;
+
+    // flagged squares have gradient that blends into the background
+    &.flag {
+      background: radial-gradient($color-flag-2, $color-board-2);
+    }
   }
 
   &.color-3 {
     background-color: $color-board-3;
+
+    // flagged squares have gradient that blends into the background
+    &.flag {
+      background: radial-gradient($color-flag-3, $color-board-3);
+    }
   }
 
   &.color-gameOver {

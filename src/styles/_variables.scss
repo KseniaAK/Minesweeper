@@ -14,8 +14,12 @@ $color-sq-border: rgb(136, 132, 132);
 
 // board colors (options)
 $color-board-gameOver: #ff6347; // tomato
+$color-board-0: white; // this is the default that the board initializes to
 $color-board-1: #B7FFD8;
 $color-board-2: #C4F5FC;
 $color-board-3: #E2A0FF;
+$color-flag-1: #2ade32;
+$color-flag-2: #219eff;
+$color-flag-3: #ff647f;
 
 $font-stack: 'Annie Use Your Telescope', cursive;
